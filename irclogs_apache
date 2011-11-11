@@ -1,0 +1,7 @@
+<VirtualHost *:80>
+  ServerName irclogs.okfn.org
+  DocumentRoot /home/okfn/irclogger/logs
+
+  ErrorLog /var/log/apache2/irclogs.okfn.org.error.log
+  CustomLog /var/log/apache2/irclogs.okfn.org.log combined
+</VirtualHost>

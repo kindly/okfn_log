@@ -1,0 +1,5 @@
+#!/bin/bash
+
+python /home/okfn/irclogger/loggy.py okfn_logger irc://irc.freenode.net/ckan,okfn,openspending /home/okfn/irclogger/logs moo
+
+
