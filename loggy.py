@@ -119,17 +119,29 @@ class Loggy(Bot):
             if request in ('pointer', 'bookmark', 'uri'): 
                day = self.now('%Y-%m-%d')
                uri = self.loguri + day + '#T' + timestamp.replace(':', '-')
-               self.msg(origin.sender, uri)
+               self.msg(origin.sender, uri, channel)
 
             elif request in ('ping', 'boing'): 
                reply = {'ping': 'pong', 'boing': 'boing!'}[request]
-               self.msg(origin.sender, '%s: %s' % (origin.nick, reply))
+               self.msg(origin.sender, '%s: %s' % (origin.nick, reply), channel)
 
             elif request in ('help', 'about'): 
                self.msg(origin.sender, 
                     ("I'm a Python IRC logging bot. " + 
                      "Source: http://inamidst.com/code/loggy.py " + 
-                     "Logging to: " + self.loguri))
+                     "Logging to: " + self.loguri), channel)
+            elif request in ('dance'): 
+               self.msg(origin.sender, "<('-'<)", channel)
+               time.sleep(0.4)
+               self.msg(origin.sender, "(>'-')>", channel)
+               time.sleep(0.4)
+               self.msg(origin.sender, "<('-'<)", channel)
+               time.sleep(0.4)
+               self.msg(origin.sender, "(>'-')>", channel)
+               time.sleep(0.4)
+               self.msg(origin.sender, "<('-'<)", channel)
+
+
 
    def logjoin(self, origin, command, channel, args, text): 
       fargs = (origin.nick, origin.user, origin.host, channel)
@@ -186,7 +198,7 @@ class Loggy(Bot):
       if commands.has_key(command): 
          commands[command](origin, command, channel, args, text)
 
-   def msg(self, recipient, text): 
+   def msg(self, recipient, text, channel=None): 
       text = Bot.msg(self, recipient, text)
       self.log('<%s> %s' % (self.nick, text), channel)
 
